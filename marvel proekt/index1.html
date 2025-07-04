@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marvel Beauty Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div class="container">
+
+
+
+   <!-- ===== NAVBAR ===== -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="logo">Marvel Beauty</a>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="services.html">Xizmatlar</a></li>
+        <li><a href="#contact">Aloqa</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+    
+  <!-- Header / Hero Section -->
+  <header class="hero">
+    <div class="overlay">
+      <h1>Marvel Beauty Studio</h1>
+      <p>Go'zallik — bu san'at, biz esa rassomlar</p>
+      <a href="#contact" class="btn">Yozilish</a>
+    </div>
+  </header>
+
+  <!-- Xizmatlar -->
+  <section class="services">
+    <h2>Xizmatlarimiz</h2>
+    <div class="service-list">
+      <div class="service">Soch turmagi</div>
+      <div class="service">Make-up</div>
+      <div class="service">Manikyur & Pedikyur</div>
+      <div class="service">Kosmetologiya</div>
+       <div class="service">Massaj</div>
+        <div class="service">Lazerniy epilatsiya</div>
+         <div class="service">depilatsiya</div>
+          <div class="service">Rastushevka</div>
+    </div>
+  </section>
+
+  <!-- Galereya -->
+  <section class="gallery">
+    <h2>Galereya</h2>
+    <div class="images">
+      <img src="./marvel.png" alt="Salon rasm">
+      <img src="./zona1.png" alt="Go'zallik zonasi">
+      <img src="./zona2.png" alt="Xizmat jarayoni">
+    </div>
+  </section>
+
+  <!-- Aloqa -->
+  <section id="contact">
+    <h2>Aloqa</h2>
+    <form id="contactForm">
+      <input id="name" type="text" placeholder="Ismingiz" required>
+      <input id="phone" type="tel" placeholder="Telefon raqamingiz" required>
+      <textarea id="msg" rows="4" placeholder="Izoh..."></textarea>
+      <button type="submit">Yuborish</button>
+    </form>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+<footer class="mb-footer">
+  <div class="mb-container">
+    <p>&copy; 2025 Marvel Beauty Studio</p>
+
+    <!-- Ijtimoiy tarmoqlar -->
+    <div class="mb-social">
+      <a href="https://www.instagram.com/marvelstudiobeauty?igsh=MW43enZrcmx4bW9ldQ==" target="_blank" rel="noopener"
+         aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://t.me/marvelbeautystudio" target="_blank" rel="noopener"
+         aria-label="Telegram">
+        <i class="fa-brands fa-telegram"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Font Awesome CDN (bir marta sahifada ulansa kifoya) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+
+</div>
+
+
+ <script>
+    const token  = '7249676688:AAGhrWinV59mFYLDP83Hk1NR5LRhTnHiR9k'; // O'zgartiring!
+    const chatId = '7389984075';      // O'zgartiring!
+
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name  = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const note  = document.getElementById('msg').value.trim() || '—';
+
+      const message = `
+<b>Yangi so'rov!</b>
+<b>Ism:</b> ${name}
+<b>Telefon:</b> ${phone}
+<b>Izoh:</b> ${note}`;
+
+      try {
+        const response = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'HTML'
+          })
+        });
+
+        if (response.ok) {
+          alert("Yuborildi! Tez orada siz bilan bog'lanamiz.");
+          form.reset();
+        } else {
+          alert("Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.");
+        }
+      } catch (err) {
+        alert("Tarmoq xatosi: " + err.message);
+      }
+    });
+  </script>
+
+</body>
+</html>
